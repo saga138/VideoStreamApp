@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Xcode / Swift
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+.build/
+
+# Kotlin / Gradle / Android
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+
+# Logs
+*.log
+
