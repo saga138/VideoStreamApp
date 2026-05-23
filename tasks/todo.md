@@ -9,7 +9,7 @@ Create the initial public GitHub repository for a SwiftUI and Compose video stre
 - [x] Initialize local Git repository.
 - [x] Add minimal project documentation.
 - [x] Add baseline ignore rules.
-- [ ] Create the first commit.
+- [x] Create the first commit.
 - [ ] Create public GitHub repository `VideoStreamApp`.
 - [ ] Push `main` to `origin`.
 
