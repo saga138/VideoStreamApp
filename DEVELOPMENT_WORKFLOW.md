@@ -1,181 +1,181 @@
-# VideoStreamApp Development Workflow
+# VideoStreamApp 開発ワークフロー
 
-## Purpose
+## 目的
 
-This repository is for learning SwiftUI and Jetpack Compose by building small video streaming app UI features.
+このリポジトリは、動画配信アプリの小さなUI機能を作りながら、SwiftUI と Jetpack Compose を学ぶためのものです。
 
-The target domain is long-form and broadcaster-style video services such as TVer, Netflix, and Hulu. The goal is not to copy any specific product, but to practice common UI structures, screen states, and implementation patterns used in streaming apps.
+対象ドメインは、TVer、Netflix、Hulu のような放送局系・長時間動画配信サービスです。特定サービスをコピーすることが目的ではありません。動画配信アプリでよく使われるUI構造、画面状態、実装パターンを練習することを目的にします。
 
-## Collaboration Style
+## 進め方
 
-Development should proceed in small, reviewable tasks.
+開発は、小さくレビューしやすいタスク単位で進めます。
 
-The user reviews and understands each change before the next task starts. This repository should not be developed in large AI-driven batches.
+ユーザーが各変更をレビューし、理解してから次のタスクへ進みます。このリポジトリでは、AI主導で大きな変更をまとめて進める開発はしません。
 
-Each task should be close to one Scrum development task, not an entire feature epic.
+各タスクは、スクラムにおける1件の開発タスクに近い粒度にします。機能群全体をまとめたエピック単位にはしません。
 
-## Task Granularity
+## タスク粒度
 
-Each task should usually satisfy these constraints:
+各タスクは、原則として次の条件を満たすようにします。
 
-- One clear goal.
-- One reviewable diff.
-- Small enough to understand in one sitting.
-- Preferably limited to one platform, one screen, or one architectural decision.
-- No unrelated refactoring.
-- No UI implementation mixed with project scaffolding unless explicitly scoped.
+- 目的が1つに絞られている。
+- 差分をレビューしやすい。
+- 一度に理解できる大きさである。
+- できるだけ、1プラットフォーム、1画面、または1つの設計判断に限定する。
+- 関係ないリファクタリングを含めない。
+- 明示的にスコープへ含めた場合を除き、プロジェクト雛形作成とUI実装を混ぜない。
 
-Examples of good task sizes:
+適切なタスク粒度の例:
 
-- Decide repository directory structure.
-- Add SwiftUI app scaffold only.
-- Add Compose app scaffold only.
-- Define shared sample content model in documentation.
-- Build SwiftUI home screen static layout.
-- Build Compose home screen static layout.
-- Add loading and error states to one screen.
-- Add navigation from home to detail on one platform.
+- リポジトリのディレクトリ構成を決める。
+- SwiftUI アプリの最小雛形だけを追加する。
+- Compose アプリの最小雛形だけを追加する。
+- 共通のサンプルコンテンツモデルをドキュメントで定義する。
+- SwiftUI でホーム画面の静的レイアウトを作る。
+- Compose でホーム画面の静的レイアウトを作る。
+- 1画面にローディング状態とエラー状態を追加する。
+- 1プラットフォームでホームから詳細への画面遷移を追加する。
 
-Examples of tasks that are too large:
+大きすぎるタスクの例:
 
-- Build the full app.
-- Implement SwiftUI and Compose apps with all screens at once.
-- Add API, persistence, navigation, and UI polish in one change.
-- Refactor project structure while adding new user-facing behavior.
+- アプリ全体を作る。
+- SwiftUI と Compose の全画面を一度に実装する。
+- API、永続化、ナビゲーション、UI調整を1つの変更にまとめる。
+- ユーザー向け挙動を追加しながら、同時にプロジェクト構成も整理する。
 
-## Initial Product Direction
+## 初期プロダクト方針
 
-Use a fictional video streaming app concept.
+架空の動画配信アプリを題材にします。
 
-Working name: `VideoStreamApp`.
+作業名: `VideoStreamApp`
 
-Core UI patterns to practice:
+練習する主なUIパターン:
 
-- Home feed with hero content and horizontal content rails.
-- Continue watching rail.
-- Ranking or trending rail.
-- Content detail page.
-- Episode list.
-- Playback surface and controls.
-- Search and category browsing.
-- Empty, loading, error, and restricted-content states.
+- ヒーローコンテンツと横スクロールのコンテンツレーンを持つホームフィード。
+- 続きから見るレーン。
+- ランキングまたはトレンドレーン。
+- コンテンツ詳細画面。
+- エピソード一覧。
+- 再生画面と再生コントロール。
+- 検索とカテゴリ閲覧。
+- 空状態、ローディング状態、エラー状態、視聴制限状態。
 
-## Suggested Task Sequence
+## 推奨タスク順
 
-### Task 002: Repository Structure Decision
+### Task 002: リポジトリ構成の決定
 
-Goal: Decide how SwiftUI and Compose code will live in this repository.
+目的: SwiftUI と Compose のコードを、このリポジトリ内でどう配置するかを決めます。
 
-Expected output:
+期待する成果物:
 
-- A short Markdown decision record.
-- Directory plan for iOS and Android or Compose modules.
-- No app scaffolding yet.
+- 短い Markdown の設計判断メモ。
+- iOS と Android または Compose モジュールのディレクトリ案。
+- まだアプリ雛形は作らない。
 
-Review focus:
+レビュー観点:
 
-- Is the structure easy to compare across SwiftUI and Compose?
-- Is it simple enough for a learning repository?
-- Does it avoid premature abstraction?
+- SwiftUI と Compose を比較しやすい構成か。
+- 学習用リポジトリとして十分にシンプルか。
+- 早すぎる抽象化を避けているか。
 
-### Task 003: SwiftUI Scaffold
+### Task 003: SwiftUI 雛形作成
 
-Goal: Add the minimal SwiftUI app shell.
+目的: 最小限の SwiftUI アプリシェルを追加します。
 
-Expected output:
+期待する成果物:
 
-- iOS project or Swift package structure.
-- A launchable placeholder screen.
-- No streaming UI yet.
+- iOSプロジェクト、または Swift Package 構成。
+- 起動可能なプレースホルダー画面。
+- まだ動画配信UIは作らない。
 
-Review focus:
+レビュー観点:
 
-- Can the project build?
-- Is the scaffold minimal?
-- Are generated files understandable?
+- プロジェクトがビルドできるか。
+- 雛形が最小限か。
+- 生成されたファイルを理解しやすいか。
 
-### Task 004: Compose Scaffold
+### Task 004: Compose 雛形作成
 
-Goal: Add the minimal Compose app shell.
+目的: 最小限の Compose アプリシェルを追加します。
 
-Expected output:
+期待する成果物:
 
-- Android or Compose Multiplatform project structure.
-- A launchable placeholder screen.
-- No streaming UI yet.
+- Android または Compose Multiplatform のプロジェクト構成。
+- 起動可能なプレースホルダー画面。
+- まだ動画配信UIは作らない。
 
-Review focus:
+レビュー観点:
 
-- Can the project build?
-- Is the scaffold comparable to the SwiftUI side?
-- Are dependencies minimal?
+- プロジェクトがビルドできるか。
+- SwiftUI 側と比較しやすい雛形か。
+- 依存関係が最小限か。
 
-### Task 005: Streaming Home UI Spec
+### Task 005: 動画配信ホームUI仕様
 
-Goal: Define the first screen before implementing it.
+目的: 最初の画面を、実装前に定義します。
 
-Expected output:
+期待する成果物:
 
-- Static home screen requirements.
-- Sample content data shape.
-- List of UI states to support later.
+- 静的なホーム画面の要件。
+- サンプルコンテンツのデータ構造。
+- 後続タスクで対応する画面状態の一覧。
 
-Review focus:
+レビュー観点:
 
-- Does the spec resemble real streaming app work?
-- Is the first implementation small enough?
+- 実際の動画配信アプリ開発に近い仕様か。
+- 最初の実装として十分小さいか。
 
-### Task 006: SwiftUI Home Static Layout
+### Task 006: SwiftUI ホーム静的レイアウト
 
-Goal: Implement the first static home screen in SwiftUI.
+目的: 最初の静的ホーム画面を SwiftUI で実装します。
 
-Expected output:
+期待する成果物:
 
-- Hero area.
-- Horizontal content rails.
-- Static sample data.
-- No networking.
+- ヒーロー領域。
+- 横スクロールのコンテンツレーン。
+- 静的サンプルデータ。
+- ネットワーク通信は含めない。
 
-Review focus:
+レビュー観点:
 
-- SwiftUI layout readability.
-- State kept minimal.
-- UI structure maps clearly to the spec.
+- SwiftUI のレイアウトが読みやすいか。
+- 状態管理が最小限か。
+- UI構造が仕様と明確に対応しているか。
 
-### Task 007: Compose Home Static Layout
+### Task 007: Compose ホーム静的レイアウト
 
-Goal: Implement the same home screen in Compose.
+目的: 同じホーム画面を Compose で実装します。
 
-Expected output:
+期待する成果物:
 
-- Hero area.
-- Horizontal content rails.
-- Static sample data.
-- No networking.
+- ヒーロー領域。
+- 横スクロールのコンテンツレーン。
+- 静的サンプルデータ。
+- ネットワーク通信は含めない。
 
-Review focus:
+レビュー観点:
 
-- Compose layout readability.
-- Similarity and differences versus SwiftUI.
-- Avoidance of unnecessary architecture.
+- Compose のレイアウトが読みやすいか。
+- SwiftUI 版との共通点と差分が見やすいか。
+- 不要なアーキテクチャを入れていないか。
 
-## Review Checklist
+## レビューチェックリスト
 
-For every task, review these points before moving on:
+各タスクの完了前に、次の点を確認します。
 
-- Does the change match the task scope?
-- Are there unrelated edits?
-- Is the implementation understandable for learning?
-- Is there a simpler solution?
-- Are naming and file placement consistent?
-- Does the project still build when applicable?
-- Are follow-up tasks clearly separated?
+- 変更内容がタスクスコープと一致しているか。
+- 関係ない変更が含まれていないか。
+- 学習目的に対して実装を理解しやすいか。
+- よりシンプルな解決策はないか。
+- 命名とファイル配置に一貫性があるか。
+- 必要な場合、プロジェクトはビルドできるか。
+- 後続タスクが明確に分離されているか。
 
-## Current Repository State
+## 現在のリポジトリ状態
 
-- GitHub repository: `https://github.com/saga138/VideoStreamApp`
-- Visibility: public
-- Current branch: `main`
-- Existing tracked files: `README.md`, `.gitignore`
-- Local task notes under `task/` or `tasks/` are ignored by Git.
+- GitHubリポジトリ: `https://github.com/saga138/VideoStreamApp`
+- 公開範囲: public
+- 現在のブランチ: `main`
+- 既存の追跡対象ファイル: `README.md`, `.gitignore`, `DEVELOPMENT_WORKFLOW.md`
+- `task/` または `tasks/` 配下のローカルタスクメモは Git の管理対象外です。
 
